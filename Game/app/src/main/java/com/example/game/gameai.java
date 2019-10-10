@@ -56,7 +56,7 @@ public class gameai extends View{
         setBackgroundColor(Color.BLACK);//设背景颜色为黑色
 
         my.player= BitmapFactory.decodeResource(getResources(),R.mipmap.player);//加载图片
-        my.enemy=BitmapFactory.decodeResource(getResources(),R.mipmap.player);
+        my.enemy=BitmapFactory.decodeResource(getResources(),R.mipmap.enemy2);
         my.bullet=BitmapFactory.decodeResource(getResources(),R.mipmap.zd);
         my.background=BitmapFactory.decodeResource(getResources(), R.mipmap.bg);
 
