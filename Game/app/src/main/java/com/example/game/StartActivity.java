@@ -8,12 +8,16 @@ import android.widget.Toast;
 public class StartActivity extends AppCompatActivity {
 
     private long time;
+    public static int player_hp = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setContentView(new gameai(this));
+        setContentView(new gameai(this,player_hp));
+        if(player_hp <=0){
+            exit();
+        }
     }
     public boolean onKeyDown(int keyCode,KeyEvent event) { //返回键
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0){

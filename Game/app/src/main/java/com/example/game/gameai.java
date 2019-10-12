@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.view.MotionEvent;
 import android.view.View;
 import java.util.Vector;
+import android.content.Intent;
 
 class my{//新建一个类 里面的东西都是静态的 当全局变量用
     public static int mark =0;//击杀数 js
@@ -21,6 +22,7 @@ class my{//新建一个类 里面的东西都是静态的 当全局变量用
     public static Bitmap player,enemy,background,bullet;//图片：我的灰机 敌人灰机 背景 我的子弹
     public static player first_player;//我的灰机
     public static background b;//背景
+    public static int player_hp;
 }
 
 public class gameai extends View{
@@ -28,8 +30,9 @@ public class gameai extends View{
     private float x,y;//按下屏幕时的坐标
     private float player_x,player_y;//按下屏幕时玩家飞机的坐标
 
-    public gameai(Context context) {
+    public gameai(Context context,int hp) {
         super(context);
+        my.player_hp = hp;
         //添加事件控制玩家飞机
         setOnTouchListener(new OnTouchListener() {
             @Override
@@ -72,6 +75,7 @@ public class gameai extends View{
             airplane h = my.player_list.get(i);           //然后在这里用一个for循环画出来
             g.drawBitmap(h.img,null,h.r,p);
         }
+        g.drawText("Player Hp : " + my.player_hp,0,my.h-100,p);
         g.drawText("击杀："+my.mark,0,my.h-50,p);
 
     }
@@ -211,17 +215,19 @@ class player extends airplane implements Runnable{//我的灰机
         setX(my.w/2-w/2);
         setY(my.h*0.7f-h/2);
         img=my.player;//初始化图片
+        my.player_hp = 20;
         my.player_list.add(this);//添加到集合里 这样才能被画出来
         new Thread(this).start();//发射子弹的线程
     }
 
     @Override
     public void run() {
-        while(true){
+        while(my.player_hp > 0){
             //90毫秒发射一发子弹
             try {Thread.sleep(90);} catch (InterruptedException e) {e.printStackTrace();}
             new bullet(this);
         }
+
     }
 }
 class bullet extends airplane implements Runnable{//我的子弹
@@ -257,6 +263,11 @@ class bullet extends airplane implements Runnable{//我的子弹
                         my.mark++;//击杀+1
                         break;
                     }
+                }
+                airplane my_h = my.first_player;
+                if(collision(my_h,30)){//判断碰撞
+                    my.player_hp -= 1;//敌人生命-子弹伤害
+                    flag=true;//一个标记 用来跳出嵌套循环
                 }
             } catch (Exception e) {
                 e.printStackTrace();
