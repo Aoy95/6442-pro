@@ -16,12 +16,8 @@ class endActivity extends Activity {
     private TextView textview;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-     //   setContentView(R.layout.end_activity);
-      //  imagebutton=(ImageButton)findViewById(R.id.button1);
-      //  textview=(TextView)findViewById(R.id.textView2);
         textview.setTextColor(Color.RED);
         textview.setTextSize(20.0f);
-        //textview.setText("分数：\n"+Enemy.grade);
         imagebutton.setOnClickListener(new View.OnClickListener() {
 
             @Override
