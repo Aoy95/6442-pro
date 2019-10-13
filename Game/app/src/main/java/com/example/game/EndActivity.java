@@ -9,8 +9,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 class endActivity extends Activity {
+    private long time;
 
     private ImageButton imagebutton;
     private TextView textview;
@@ -29,12 +31,29 @@ class endActivity extends Activity {
     }
     public boolean onKeyDown(int KeyCode,KeyEvent Event){
 
-        if(KeyCode==KeyEvent.KEYCODE_BACK)
-        {
+        if (KeyCode == KeyEvent.KEYCODE_BACK && Event.getRepeatCount() == 0){
+            long t=System.currentTimeMillis();
+            if(t-time<=100){
+                exit();
+            }else{
+                time=t;
+                Toast.makeText(getApplicationContext(),"Double press to exit the game",Toast.LENGTH_SHORT).show();
+            }
 
-            finish();
+            return true;
         }
-        return true;
+        return false;
+
+    }
+    public void exit(){
+        endActivity.this.finish();
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {Thread.sleep(500);} catch (InterruptedException e) {e.printStackTrace();}
+                System.exit(0);
+            }
+        }).start();
     }
 }
 
