@@ -19,6 +19,9 @@ public class StartActivity extends AppCompatActivity {
             exit();
         }
     }
+
+
+
     public boolean onKeyDown(int keyCode,KeyEvent event) { //返回键
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0){
             long t=System.currentTimeMillis();//获取系统时间
