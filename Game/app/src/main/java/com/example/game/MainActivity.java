@@ -16,15 +16,15 @@ public class MainActivity extends AppCompatActivity {
 
         Button btn1=(Button)findViewById(R.id.btnTextView1);
 
-        //给btn1绑定监听事件
+
         btn1.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                // 给bnt1添加点击响应事件
+
                 Intent intent =new Intent(MainActivity.this,StartActivity.class);
-                //启动
+
                 startActivity(intent);
             }
         });

@@ -12,16 +12,15 @@ import android.view.View;
 import java.util.Vector;
 import android.content.Intent;
 
-class my{//新建一个类 里面的东西都是静态的 当全局变量用
-    public static int mark =0;//击杀数 js
-    public static int w,h;//屏幕的宽高
-    public static float screen_rate;//比例，用于适应不同屏幕
-    public static Vector<airplane> player_list=new Vector<airplane>();//所有飞行物的集合,添加进这个集合才能被画出来
-    public static Vector<airplane> enemy_list=new Vector<airplane>();//敌人飞机的集合，添加进这个集合才能被子弹打中
-    //我集合学的挺烂的哈 为什么用Vector呢？因为他线程是安全的。。。
-    public static Bitmap player,enemy,background,bullet;//图片：我的灰机 敌人灰机 背景 我的子弹
-    public static player first_player;//我的灰机
-    public static background b;//背景
+class my{
+    public static int mark =0;//kill number
+    public static int w,h;//weight and height
+    public static float screen_rate;//poportion
+    public static Vector<airplane> player_list=new Vector<airplane>();//plane list
+    public static Vector<airplane> enemy_list=new Vector<airplane>();//enermy list
+    public static Bitmap player,enemy,background,bullet;//picture,background picture,bullet
+    public static player first_player;//my plane
+    public static background b;//background
     public static int player_hp;
 }
 

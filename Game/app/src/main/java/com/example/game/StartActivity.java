@@ -22,11 +22,11 @@ public class StartActivity extends AppCompatActivity {
 
 
 
-    public boolean onKeyDown(int keyCode,KeyEvent event) { //返回键
+    public boolean onKeyDown(int keyCode,KeyEvent event) { //kack key
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0){
-            long t=System.currentTimeMillis();//获取系统时间
+            long t=System.currentTimeMillis();//get system time
             if(t-time<=500){
-                exit(); //如果500毫秒内按下两次返回键则退出游戏
+                exit(); //exit game if press twice with 500
             }else{
                 time=t;
                 Toast.makeText(getApplicationContext(),"再按一次退出游戏",Toast.LENGTH_SHORT).show();
