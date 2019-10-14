@@ -153,6 +153,98 @@ class airplane{//游戏内所有物体的父类
 
     }
 }
+
+
+class Bossplane extends airplane implements Runnable{
+    private long sd0=(long) (Math.random()*10)+10;
+    private Bitmap bitmap;
+    private int x,y;
+    private int frameW,frameH;
+    private int speed = 4;
+    private int crazySpeed =50;
+    private int count;//count
+    private int time = 50;//intern
+    private boolean isCrazy;
+
+
+    public Bossplane(Bitmap bitmap) {
+        this.bitmap = bitmap;
+        this.frameW = bitmap.getWidth()/10;
+        this.frameH = bitmap.getHeight();
+    }
+
+    public void draw(Canvas canvas, Paint paint){
+        canvas.save();
+        canvas.clipRect(x,y,x+frameW,y+frameH);//draw boss plane
+        canvas.drawBitmap(bitmap,x,y,paint);
+        canvas.restore();//release
+        logic();
+    }
+
+    public void logic() {
+        count++;
+        if (isCrazy) {
+            //crazy
+            y = y + crazySpeed;
+            crazySpeed--;
+            if (y == 0) {
+                isCrazy = false;
+                crazySpeed = 50;
+            }
+
+        } else {
+            if (y > my.h - frameH) {
+                crazySpeed = -crazySpeed;
+            }
+
+            if (count % time == 0) {
+                isCrazy = true;
+            }
+            x = x + speed;
+            if (x > my.w - frameW) {
+                speed = -speed;
+            }
+            if (x < 0) {
+                speed = -speed;
+            }
+        }
+    }
+
+
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public int getFrameW() {
+        return frameW;
+    }
+
+    public int getFrameH() {
+        return frameH;
+    }
+    public void run() {
+        while(hp>0){
+            try {Thread.sleep(sd0);} catch (InterruptedException e) {e.printStackTrace();}
+            setY(r.top+2*my.screen_rate);
+            if(r.top>=my.h)break;//敌人飞出屏幕 跳出循环
+        }
+        //从集合删除
+        my.player_list.remove(this);
+        my.enemy_list.remove(this);
+    }
+
+}
+
+
 class background extends airplane implements  Runnable{//背景
     public background(){
         w=my.w;
