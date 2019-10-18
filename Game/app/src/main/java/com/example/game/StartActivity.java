@@ -29,7 +29,7 @@ public class StartActivity extends AppCompatActivity {
                 exit(); //exit game if press twice with 500
             }else{
                 time=t;
-                Toast.makeText(getApplicationContext(),"再按一次退出游戏",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Press to exit game",Toast.LENGTH_SHORT).show();
             }
 
             return true;
